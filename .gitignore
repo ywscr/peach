@@ -56,7 +56,6 @@ _ReSharper*
 _NCrunch_*
 
 artifacts/
-build/
 # NuGet Packages Directory
 packages
 
@@ -69,3 +68,5 @@ TestResult.xml
 .idea/
 
 doc/_site/
+
+node_modules/

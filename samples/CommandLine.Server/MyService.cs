@@ -31,12 +31,13 @@ namespace CommandLine.Server
 
         public override void OnException(ISocketContext<CommandLineMessage> context, Exception ex)
         {
-            _logger.LogError(ex,"client from {0}, occ error {1}", context.RemoteEndPoint,ex.Message);
+            _logger.LogError(ex, "client from {0},  occ error {1}", context.RemoteEndPoint, ex.Message);
             base.OnException(context, ex);
         }
 
         public override void OnReceive(ISocketContext<CommandLineMessage> context, CommandLineMessage msg)
         {
+            _logger.LogInformation("receive msg from {0},{1}", context.RemoteEndPoint, msg.Command);
             string replyMessage = string.Empty;
             string replyCmd = string.Empty;
             switch (msg.Command)
@@ -49,6 +50,10 @@ namespace CommandLine.Server
                     replyMessage = "ok";
                     replyCmd = "init_reply";
 
+                    break;
+                case "idle":
+                    replyMessage = "ok";
+                    replyCmd = "idle_reply";
                     break;
                 default:
                     replyMessage = "error unknow command";
